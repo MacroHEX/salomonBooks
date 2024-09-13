@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SessionWrapper from "@/components/SessionWrapper";
+import {Toaster} from "sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,6 +34,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
       <div className='min-h-screen flex flex-col'>
+        <Toaster richColors position={"bottom-right"}/>
         <Header/>
         <main className='flex-grow'>
           {children}

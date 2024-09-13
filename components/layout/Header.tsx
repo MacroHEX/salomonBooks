@@ -38,12 +38,6 @@ export default function Header() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden pb-4">
-            <Link href="/browse" className="block py-2 hover:text-primary-foreground/80">
-              Browse
-            </Link>
-            <Link href="/my-books" className="block py-2 hover:text-primary-foreground/80">
-              My Books
-            </Link>
             <div className="py-2">
               <UserMenu/>
             </div>

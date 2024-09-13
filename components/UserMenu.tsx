@@ -50,7 +50,11 @@ const UserMenu = () => {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator/>
-            <DropdownMenuItem>Perfil</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href='/perfil'>
+                Perfil
+              </Link>
+            </DropdownMenuItem>
             <DropdownMenuSeparator/>
             <DropdownMenuItem>
               <button onClick={() => signOut()}>
