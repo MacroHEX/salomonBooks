@@ -58,51 +58,69 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    async signIn({user, account}) {
-      if (user.email) {
-        const existingUser = await prisma.user.findUnique({
-          where: {email: user.email},
-        });
-
-        if (!existingUser) {
-          await prisma.user.create({
-            data: {
-              id: user.id,
-              name: user.name,
-              email: user.email,
-              image: user.image,
-              rol: "USUARIO",
-            },
-          });
-        }
-
-        if (existingUser && account) {
-          // Link the account if it exists
-          await prisma.account.upsert({
-            where: {
-              provider_providerAccountId: {
-                provider: account.provider,
-                providerAccountId: account.providerAccountId,
-              },
-            },
-            update: {},
-            create: {
-              userId: existingUser.id,
-              provider: account.provider,
-              providerAccountId: account.providerAccountId,
-              type: account.type,
-              access_token: account.access_token,
-              id_token: account.id_token,
-              refresh_token: account.refresh_token,
-              scope: account.scope,
-              token_type: account.token_type,
-              expires_at: account.expires_at,
-              session_state: account.session_state,
-            },
-          });
-        }
+    async signIn({user, account}: { user: any; account: any }) {
+      if (!user?.email || !account?.provider || !account?.providerAccountId) {
+        throw new Error('Invalid user or account information');
       }
 
+      const email = user.email as string;
+      const userId = user.id as string;
+      const name = user.name || '';
+      const image = user.image || '';
+
+      const existingUser = await prisma.user.findUnique({
+        where: {email},
+      });
+
+      if (!existingUser) {
+        const newUser = await prisma.user.create({
+          data: {
+            id: userId,
+            name,
+            email,
+            image,
+            rol: 'USUARIO',
+            accounts: {
+              create: {
+                provider: account.provider,
+                providerAccountId: account.providerAccountId,
+                type: account.type || 'oauth',
+                access_token: account.access_token || '',
+                id_token: account.id_token || '',
+                refresh_token: account.refresh_token || '',
+                scope: account.scope || '',
+                token_type: account.token_type || '',
+                expires_at: account.expires_at || null,
+                session_state: account.session_state || '',
+              },
+            },
+          },
+        });
+
+      } else {
+        await prisma.account.upsert({
+          where: {
+            provider_providerAccountId: {
+              provider: account.provider,
+              providerAccountId: account.providerAccountId,
+            },
+          },
+          update: {},
+          create: {
+            userId: existingUser.id,
+            provider: account.provider,
+            providerAccountId: account.providerAccountId,
+            type: account.type || 'oauth',
+            access_token: account.access_token || '',
+            id_token: account.id_token || '',
+            refresh_token: account.refresh_token || '',
+            scope: account.scope || '',
+            token_type: account.token_type || '',
+            expires_at: account.expires_at || null,
+            session_state: account.session_state || '',
+          },
+        });
+      }
       return true;
     },
   },
