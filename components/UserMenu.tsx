@@ -50,6 +50,13 @@ const UserMenu = () => {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator/>
+
+            <DropdownMenuItem>
+              <Link href='/perfil'>
+                Perfil
+              </Link>
+            </DropdownMenuItem>
+
             <DropdownMenuItem>
               <Link href='/perfil'>
                 Perfil

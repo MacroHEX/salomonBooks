@@ -1,18 +1,16 @@
 'use client'
 
 import {useSession} from "next-auth/react";
+import Home from "@/screens/Home";
 
-export default function Home() {
+export default function HomePage() {
 
   const {data: session} = useSession();
 
   return (
 
     <>
-      {session ?
-        <h1>{JSON.stringify(session)}</h1> :
-        <h1 className='text-8xl'>(❁´◡`❁)</h1>
-      }
+      <Home/>
     </>
   );
 }
