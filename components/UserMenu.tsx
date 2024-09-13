@@ -57,11 +57,13 @@ const UserMenu = () => {
               </Link>
             </DropdownMenuItem>
 
-            <DropdownMenuItem>
-              <Link href='/perfil'>
-                Perfil
-              </Link>
-            </DropdownMenuItem>
+            {session.user.role === 'ADMIN' &&
+                <DropdownMenuItem>
+                    <Link href='/dashboard'>
+                        Panel Admin
+                    </Link>
+                </DropdownMenuItem>
+            }
             <DropdownMenuSeparator/>
             <DropdownMenuItem>
               <button onClick={() => signOut()}>
