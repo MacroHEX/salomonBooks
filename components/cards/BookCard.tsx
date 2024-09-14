@@ -9,14 +9,17 @@ interface Props {
 
 const BookCard = ({book}: Props) => {
   return (
-    <Card className="overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
+    <Card
+      className="overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 w-40 md:w-80">
       <CardHeader className="relative w-full aspect-[3/4] rounded-t-lg overflow-hidden">
         <Image
           src={book.imagenPortada ? book.imagenPortada : ''}
           alt={`Portada de ${book.titulo}`}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1800px) 50vw, 33vw"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="rounded-md"
+          style={{width: '100%', height: 'auto'}}
         />
       </CardHeader>
       <CardContent className="p-4">

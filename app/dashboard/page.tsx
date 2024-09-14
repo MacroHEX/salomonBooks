@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
@@ -8,6 +8,7 @@ import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from '@/components/ui/form';
 import {Input} from '@/components/ui/input';
+import {toast} from "sonner";
 
 const FormSchema = z.object({
   titulo: z.string(),
@@ -23,12 +24,15 @@ const FormSchema = z.object({
 });
 
 const DashboardPage = () => {
+
+  const [loading, setLoading] = useState<boolean>(false);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       titulo: '',
       autor: '',
-      editorial: '',
+      editorial: 'GoodReads',
       isbn: '',
       totalCopias: 10,
       copiasDisponibles: 10,
@@ -49,7 +53,11 @@ const DashboardPage = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    }).then();
+    }).then(() => {
+      form.reset();
+      toast.success('Libro Agregado con éxito')
+      setLoading(false);
+    });
   }
 
   return (
@@ -178,7 +186,7 @@ const DashboardPage = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit">Submit</Button>
+              <Button type="submit" disabled={loading}>Agregar Libro</Button>
             </form>
           </Form>
         </CardContent>

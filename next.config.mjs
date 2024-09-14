@@ -9,6 +9,10 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'cdn.donmai.us',
+            },
+            {
+                protocol: 'https',
+                hostname: 'images-na.ssl-images-amazon.com',
             }
         ]
     }

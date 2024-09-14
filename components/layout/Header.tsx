@@ -21,9 +21,6 @@ export default function Header() {
             <span className="font-bold text-lg hidden sm:inline">Salomon Books</span>
           </Link>
 
-          {/* Center text - hidden on small screens */}
-          <div className="hidden md:block font-semibold text-xl">Libros</div>
-
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-4">
             <UserMenu/>
