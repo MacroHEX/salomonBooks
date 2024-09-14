@@ -1,8 +1,8 @@
 import type {Metadata} from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import Header from "@/layout/Header";
+import Footer from "@/layout/Footer";
 import SessionWrapper from "@/components/SessionWrapper";
 import {Toaster} from "sonner";
 

@@ -13,6 +13,7 @@ import {Button} from "@/components/ui/button";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import Link from "next/link";
 import {signOut, useSession} from "next-auth/react";
+import {Users} from "lucide-react";
 
 
 const UserMenu = () => {
@@ -28,7 +29,9 @@ const UserMenu = () => {
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
             {session && <AvatarImage src={session.user?.image ? session.user?.image : '/'} alt="@username"/>}
-            <AvatarFallback>A</AvatarFallback>
+            <AvatarFallback>
+              <Users className='text-stone-500 hover:text-stone-800'/>
+            </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -44,7 +47,6 @@ const UserMenu = () => {
           <>
             <DropdownMenuLabel>
               <div className="flex flex-col space-y-1">
-                {/*TODO::: Aca va a ir el nombre del usuario*/}
                 {session && <p className="text-sm leading-none">{session.user?.name}</p>}
                 {session && <p className="text-sm font-thin leading-none">{session.user?.email}</p>}
               </div>
