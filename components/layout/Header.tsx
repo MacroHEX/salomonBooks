@@ -16,7 +16,7 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/public" className="flex items-center">
             <Book className="h-8 w-8 mr-2"/>
             <span className="font-bold text-lg hidden sm:inline">Salomon Books</span>
           </Link>
