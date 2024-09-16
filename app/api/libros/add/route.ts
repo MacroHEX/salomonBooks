@@ -36,7 +36,9 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json(newLibro, {status: 201});
+    const response = NextResponse.json(newLibro, {status: 201});
+    response.headers.set('Cache-Control', 'no-store');
+    return response;
   } catch (error) {
     const err = error as CustomError;
     return NextResponse.json({message: `Fallo al agregar el libro: ${err.message}`}, {status: 500});
